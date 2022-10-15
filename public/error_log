@@ -1,0 +1,14 @@
+[12-Sep-2022 15:04:59 UTC] PHP Warning:  require_once(/home2/mobilesmartdev/sookorean.mobilesmartdev.com/public/../bootstrap/app.php): Failed to open stream: No such file or directory in /home2/mobilesmartdev/sookorean.mobilesmartdev.com/public/index.php on line 47
+[12-Sep-2022 15:04:59 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home2/mobilesmartdev/sookorean.mobilesmartdev.com/public/../bootstrap/app.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home2/mobilesmartdev/sookorean.mobilesmartdev.com/public/index.php:47
+Stack trace:
+#0 {main}
+  thrown in /home2/mobilesmartdev/sookorean.mobilesmartdev.com/public/index.php on line 47
+[20-Sep-2022 08:04:14 UTC] PHP Fatal error:  Constant expression contains invalid operations in /home2/mobilesmartdev/sookorean.mobilesmartdev.com/app/Http/Controllers/Auth/ResetPasswordController.php on line 29
+[20-Sep-2022 08:04:24 UTC] PHP Fatal error:  Constant expression contains invalid operations in /home2/mobilesmartdev/sookorean.mobilesmartdev.com/app/Http/Controllers/Auth/ResetPasswordController.php on line 29
+[20-Sep-2022 08:04:47 UTC] PHP Fatal error:  Constant expression contains invalid operations in /home2/mobilesmartdev/sookorean.mobilesmartdev.com/app/Http/Controllers/Auth/ResetPasswordController.php on line 29
+[20-Sep-2022 08:05:01 UTC] PHP Fatal error:  Constant expression contains invalid operations in /home2/mobilesmartdev/sookorean.mobilesmartdev.com/app/Http/Controllers/Auth/ResetPasswordController.php on line 29
+[20-Sep-2022 08:05:18 UTC] PHP Fatal error:  Constant expression contains invalid operations in /home2/mobilesmartdev/sookorean.mobilesmartdev.com/app/Http/Controllers/Auth/ResetPasswordController.php on line 29
+[20-Sep-2022 08:05:31 UTC] PHP Fatal error:  Constant expression contains invalid operations in /home2/mobilesmartdev/sookorean.mobilesmartdev.com/app/Http/Controllers/Auth/ResetPasswordController.php on line 29
+[20-Sep-2022 08:05:56 UTC] PHP Fatal error:  Constant expression contains invalid operations in /home2/mobilesmartdev/sookorean.mobilesmartdev.com/app/Http/Controllers/Auth/ResetPasswordController.php on line 29
+[20-Sep-2022 08:06:37 UTC] PHP Fatal error:  Constant expression contains invalid operations in /home2/mobilesmartdev/sookorean.mobilesmartdev.com/app/Http/Controllers/Auth/ResetPasswordController.php on line 29
+[20-Sep-2022 08:06:47 UTC] PHP Fatal error:  Constant expression contains invalid operations in /home2/mobilesmartdev/sookorean.mobilesmartdev.com/app/Http/Controllers/Auth/ResetPasswordController.php on line 29
