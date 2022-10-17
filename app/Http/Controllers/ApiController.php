@@ -305,7 +305,30 @@ class ApiController extends Controller
             $errors = $validator->errors();
             return response()->json(compact('status', 'errors'));
         }
-        $levels = DB::table('levels')->orderBy('id', 'desc')->where('category_id', $request->category_id)->get();
+        $levelsData = DB::table('levels')->orderBy('id', 'desc')->where('category_id', $request->category_id)->get();
+        $levels = array();
+        foreach ($levelsData as $level){
+            $completed = DB::table('user_levels')->where('level_id', $level->id)->where('user_id', $this->guard()->id())->first();
+            if ($completed){
+                $completeStatus = $completed->completed;
+            }else{
+                $completeStatus = 'no';
+            }
+            $levels[] = array(
+                'image' => $level->image,
+                'title_english' => $level->title_english,
+                'title_japanese' => $level->title_japanese,
+                'title_french' => $level->title_french,
+                'title_spanish' => $level->title_spanish,
+                'title_arabic' => $level->title_arabic,
+                'description_english' => $level->description_english,
+                'description_japanese' => $level->description_japanese,
+                'description_french' => $level->description_french,
+                'description_spanish' => $level->description_spanish,
+                'background_color' => $level->background_color,
+                'completed' => $completeStatus,
+            );
+        }
         $status = true;
         return response()->json(compact('status', 'levels'));
     }
@@ -541,19 +564,46 @@ class ApiController extends Controller
             return response()->json(compact('status', 'message'));
         }
     }
-    
+
     public function getBenefits()
     {
         $benefits = DB::table('benefits')->orderBy('id', 'desc')->get();
         $status = true;
         return response()->json(compact('status', 'benefits'));
     }
-    
+
     public function getLifeJobs()
     {
         $lifejobs = DB::table('life_and_jobs')->orderBy('id', 'desc')->get();
         $status = true;
         return response()->json(compact('status', 'lifejobs'));
+    }
+
+    public function markLevelComplete(Request $request)
+    {
+        $validator = Validator::make($request->all(),
+            [
+                'level_id' => 'required',
+            ],
+            [
+                'level_id.required' => 'Level ID is required',
+            ]
+        );
+        if ($validator->fails()) {
+            $status = false;
+            $errors = $validator->errors();
+            return response()->json(compact('status', 'errors'));
+        }
+        $data = DB::table('user_levels')
+            ->insert(['user_id' => $this->guard()->user()->id, 'level_id' => $request->level_id, 'completed' => 'yes']);
+        if ($data) {
+            $status = true;
+            return response()->json(compact('status', 'data'));
+        } else {
+            $status = false;
+            $message = 'No content found';
+            return response()->json(compact('status', 'message'));
+        }
     }
 
 }

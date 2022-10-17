@@ -26,7 +26,6 @@ Route::group(['middleware' => 'api'], function ($router) {
         Route::get('/learn-categories', 'getLearnCategories');
         Route::post('/learn-subcategories', 'getLearnSubCategories');
         Route::post('/levels', 'getLevels');
-        Route::post('/levels', 'getLevels');
         Route::post('/questions', 'getQuestions');
         Route::get('/gifs', 'getGifs');
         Route::post('/update-carrot-point', 'updateCarrotPoint');
