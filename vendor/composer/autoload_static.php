@@ -672,6 +672,7 @@ class ComposerStaticInit8dbc5ce135127f3a7609cc3628701cb2
         'App\\Models\\Ticket' => __DIR__ . '/../..' . '/app/Models/Ticket.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
         'App\\Models\\UserCarrot' => __DIR__ . '/../..' . '/app/Models/UserCarrot.php',
+        'App\\Models\\UserLevel' => __DIR__ . '/../..' . '/app/Models/UserLevel.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',
