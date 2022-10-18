@@ -265,12 +265,19 @@ class ApiController extends Controller
 
     public function getLearnCategories()
     {
-        $categories = DB::table('learn_categories')
-            ->select('learn_categories.*','learn_subcategories.*')
-            ->leftJoin('learn_subcategories', 'learn_subcategories.category_id', '=', 'learn_categories.id')
-            ->orderBy('learn_categories.id', 'desc')
-            ->groupBy('learn_categories.id')
+        $categories = array();
+        $categoriesData = DB::table('learn_categories')
+            ->orderBy('id', 'desc')
             ->get();
+        foreach ($categoriesData as $cat) {
+            $subCategoriesData = DB::table('learn_subcategories')
+                ->orderBy('id', 'desc')
+                ->get();
+            $categories[] = array(
+                $cat,
+                'sub_categories' => $subCategoriesData
+            );
+        }
         $status = true;
         return response()->json(compact('status', 'categories'));
     }
@@ -312,11 +319,11 @@ class ApiController extends Controller
         }
         $levelsData = DB::table('levels')->orderBy('id', 'desc')->where('category_id', $request->category_id)->get();
         $levels = array();
-        foreach ($levelsData as $level){
+        foreach ($levelsData as $level) {
             $completed = DB::table('user_levels')->where('level_id', $level->id)->where('user_id', $this->guard()->id())->first();
-            if ($completed){
+            if ($completed) {
                 $completeStatus = $completed->completed;
-            }else{
+            } else {
                 $completeStatus = 'no';
             }
             $levels[] = array(
