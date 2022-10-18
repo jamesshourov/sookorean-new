@@ -315,18 +315,18 @@ class ApiController extends Controller
                 $completeStatus = 'no';
             }
             $levels[] = array(
-                'image' => $level->image,
-                'title_english' => $level->title_english,
-                'title_japanese' => $level->title_japanese,
-                'title_french' => $level->title_french,
-                'title_spanish' => $level->title_spanish,
-                'title_arabic' => $level->title_arabic,
-                'description_english' => $level->description_english,
-                'description_japanese' => $level->description_japanese,
-                'description_french' => $level->description_french,
-                'description_spanish' => $level->description_spanish,
-                'background_color' => $level->background_color,
-                'completed' => $completeStatus,
+                'image' => $level->image ?: '',
+                'title_english' => $level->title_english ?: '',
+                'title_japanese' => $level->title_japanese ?: '',
+                'title_french' => $level->title_french ?: '',
+                'title_spanish' => $level->title_spanish ?: '',
+                'title_arabic' => $level->title_arabic ?: '',
+                'description_english' => $level->description_english ?: '',
+                'description_japanese' => $level->description_japanese ?: '',
+                'description_french' => $level->description_french ?: '',
+                'description_spanish' => $level->description_spanish ?: '',
+                'background_color' => $level->background_color ?: '',
+                'completed' => $completeStatus ?: '',
             );
         }
         $status = true;
