@@ -265,7 +265,12 @@ class ApiController extends Controller
 
     public function getLearnCategories()
     {
-        $categories = DB::table('learn_categories')->orderBy('id', 'desc')->get();
+        $categories = DB::table('learn_categories')
+            ->select('learn_categories.*','learn_subcategories.*')
+            ->leftJoin('learn_subcategories', 'learn_subcategories.category_id', '=', 'learn_categories.id')
+            ->orderBy('learn_categories.id', 'desc')
+            ->groupBy('learn_categories.id')
+            ->get();
         $status = true;
         return response()->json(compact('status', 'categories'));
     }
