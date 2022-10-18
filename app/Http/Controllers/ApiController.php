@@ -273,10 +273,8 @@ class ApiController extends Controller
             $subCategoriesData = DB::table('learn_subcategories')
                 ->orderBy('id', 'desc')
                 ->get();
-            $categories[] = array(
-                $cat,
-                'sub_categories' => $subCategoriesData
-            );
+            $fCat = array_merge(['sub_categories' => $subCategoriesData], $cat);
+            $categories[] = $fCat;
         }
         $status = true;
         return response()->json(compact('status', 'categories'));
