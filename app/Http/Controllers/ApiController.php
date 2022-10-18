@@ -268,13 +268,15 @@ class ApiController extends Controller
         $categories = array();
         $categoriesData = DB::table('learn_categories')
             ->orderBy('id', 'desc')
-            ->get()->toArray();
-        foreach ($categoriesData as $cat) {
+            ->get();
+        foreach ($categoriesData as $cat){
             $subCategoriesData = DB::table('learn_subcategories')
                 ->orderBy('id', 'desc')
-                ->get()->toArray();
-            $fCat = array_merge(['sub_categories' => $subCategoriesData], $cat);
-            $categories[] = $fCat;
+                ->get();
+            $categories[] = array(
+                'category' => $cat,
+                'sub_categories' => $subCategoriesData
+            );
         }
         $status = true;
         return response()->json(compact('status', 'categories'));
@@ -317,11 +319,11 @@ class ApiController extends Controller
         }
         $levelsData = DB::table('levels')->orderBy('id', 'desc')->where('category_id', $request->category_id)->get();
         $levels = array();
-        foreach ($levelsData as $level) {
+        foreach ($levelsData as $level){
             $completed = DB::table('user_levels')->where('level_id', $level->id)->where('user_id', $this->guard()->id())->first();
-            if ($completed) {
+            if ($completed){
                 $completeStatus = $completed->completed;
-            } else {
+            }else{
                 $completeStatus = 'no';
             }
             $levels[] = array(
