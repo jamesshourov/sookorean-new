@@ -268,11 +268,11 @@ class ApiController extends Controller
         $categories = array();
         $categoriesData = DB::table('learn_categories')
             ->orderBy('id', 'desc')
-            ->get();
+            ->get()->toArray();
         foreach ($categoriesData as $cat) {
             $subCategoriesData = DB::table('learn_subcategories')
                 ->orderBy('id', 'desc')
-                ->get();
+                ->get()->toArray();
             $fCat = array_merge(['sub_categories' => $subCategoriesData], $cat);
             $categories[] = $fCat;
         }
