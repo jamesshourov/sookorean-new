@@ -297,7 +297,17 @@ class ApiController extends Controller
             $errors = $validator->errors();
             return response()->json(compact('status', 'errors'));
         }
-        $categories = DB::table('learn_subcategories')->orderBy('id', 'desc')->where('category_id', $request->category_id)->get();
+        $categories = array();
+        $categoriesData = DB::table('learn_subcategories')->orderBy('id', 'desc')->where('category_id', $request->category_id)->get();
+        foreach ($categoriesData as $cat){
+            $content = DB::table('learn_contents')
+                ->orderBy('id', 'desc')
+                ->get();
+            $categories[] = array(
+                'category' => $cat,
+                'contents' => $content
+            );
+        }
         $status = true;
         return response()->json(compact('status', 'categories'));
     }
