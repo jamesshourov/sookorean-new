@@ -40,7 +40,7 @@ Route::group(['middleware' => 'api'], function ($router) {
         Route::post('/learn-contents', 'learnContents');
         Route::post('/get-benefits', 'getBenefits');
         Route::post('/get-lifejobs', 'getLifeJobs');
-        Route::post('/create-ticket', 'createTicket');
         Route::post('/mark-level-completed', 'markLevelCompleted');
+        Route::post('/create-ticket', 'createTicket');
     });
 });

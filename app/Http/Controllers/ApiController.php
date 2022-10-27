@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\TicketCreated;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Mail\Message;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -16,7 +17,7 @@ class ApiController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth.api:api', ['except' => ['login', 'signup', 'getCarrots', 'resetPassword']]);
+        $this->middleware('auth.api:api', ['except' => ['login', 'signup', 'getCarrots', 'resetPassword', 'createTicket']]);
     }
 
     protected function guard()
@@ -637,6 +638,7 @@ class ApiController extends Controller
             $errors = $validator->errors();
             return response()->json(compact('status', 'errors'));
         }
+        $ticket_number = Str::random(6);
         $status = DB::table('tickets')
             ->insert([
                 'sender_email' => $request->sender_email,
@@ -644,10 +646,27 @@ class ApiController extends Controller
                 'title' => $request->title,
                 'description' => $request->description,
                 'type' => $request->type,
-                'ticket_number' => Str::random(6),
+                'ticket_number' => $ticket_number,
             ]);
         if ($status){
-
+            try {
+                $mailData = array(
+                    'ticket_number' => $ticket_number
+                );
+                $email = $request->sender_email;
+                Mail::to($email)->send(new TicketCreated($mailData));
+                $status = true;
+                $message = 'Ticket created';
+                return response()->json(compact('status', 'message'));
+            }catch (\Exception){
+                $status = false;
+                $message = 'Ticket created';
+                return response()->json(compact('status', 'message'));
+            }
+        }else{
+            $status = false;
+            $message = 'Something went wrong';
+            return response()->json(compact('status', 'message'));
         }
     }
 

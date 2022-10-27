@@ -123,9 +123,9 @@ img {
     -premailer-cellpadding: 0;
     -premailer-cellspacing: 0;
     -premailer-width: 100%;
-    background-color: #edf2f7;
-    border-bottom: 1px solid #edf2f7;
-    border-top: 1px solid #edf2f7;
+    background-color: #F6BFDF;
+    border-bottom: 1px solid #F6BFDF;
+    border-top: 1px solid #F6BFDF;
     margin: 0;
     padding: 0;
     width: 100%;
@@ -170,7 +170,7 @@ img {
 }
 
 .footer p {
-    color: #b0adc5;
+    color: #000;
     font-size: 12px;
     text-align: center;
 }
@@ -265,7 +265,7 @@ img {
 }
 
 .panel-content {
-    background-color: #edf2f7;
+    background-color: #F6BFDF;
     color: #718096;
     padding: 16px;
 }
