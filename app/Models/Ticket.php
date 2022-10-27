@@ -9,8 +9,9 @@ class Ticket extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'email',
-        'name',
+        'sender_email',
+        'receiver_email',
+        'sender_name',
         'title',
         'description',
         'type',

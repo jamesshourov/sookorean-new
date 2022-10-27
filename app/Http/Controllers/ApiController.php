@@ -265,19 +265,7 @@ class ApiController extends Controller
 
     public function getLearnCategories()
     {
-        $categories = array();
-        $categoriesData = DB::table('learn_categories')
-            ->orderBy('id', 'desc')
-            ->get();
-        foreach ($categoriesData as $cat){
-            $subCategoriesData = DB::table('learn_subcategories')
-                ->orderBy('id', 'desc')
-                ->get();
-            $categories[] = array(
-                'category' => $cat,
-                'sub_categories' => $subCategoriesData
-            );
-        }
+        $categories = DB::table('learn_categories')->orderBy('id', 'desc')->get();
         $status = true;
         return response()->json(compact('status', 'categories'));
     }
@@ -301,7 +289,7 @@ class ApiController extends Controller
         $categoriesData = DB::table('learn_subcategories')->orderBy('id', 'desc')->where('category_id', $request->category_id)->get();
         foreach ($categoriesData as $cat){
             $content = DB::table('learn_contents')
-                ->orderBy('id', 'desc')
+                ->orderBy('id', 'desc')->where('category_id', $cat->id)
                 ->get();
             $categories[] = array(
                 'category' => $cat,
@@ -622,6 +610,44 @@ class ApiController extends Controller
             $status = false;
             $message = 'No content found';
             return response()->json(compact('status', 'message'));
+        }
+    }
+
+    public function createTicket(Request $request){
+        $validator = Validator::make($request->all(),
+            [
+                'sender_email' => 'required',
+                'receiver_email' => 'required',
+                'sender_name' => 'required',
+                'title' => 'required',
+                'description' => 'required',
+                'type' => 'required',
+            ],
+            [
+                'sender_email.required' => 'Sender Email is required',
+                'receiver_email.required' => 'Receiver Email is required',
+                'sender_name.required' => 'Sender Name is required',
+                'title.required' => 'Title is required',
+                'description.required' => 'Description is required',
+                'type.required' => 'Type is required',
+            ]
+        );
+        if ($validator->fails()) {
+            $status = false;
+            $errors = $validator->errors();
+            return response()->json(compact('status', 'errors'));
+        }
+        $status = DB::table('tickets')
+            ->insert([
+                'sender_email' => $request->sender_email,
+                'receiver_email' => $request->receiver_email,
+                'title' => $request->title,
+                'description' => $request->description,
+                'type' => $request->type,
+                'ticket_number' => Str::random(6),
+            ]);
+        if ($status){
+
         }
     }
 
