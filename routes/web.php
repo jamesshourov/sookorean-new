@@ -147,11 +147,9 @@ Route::group(['middleware' => ['admin']], function () {
     });
 
     Route::controller(\App\Http\Controllers\TicketController::class)->group(function () {
-        Route::post('/tickets', 'all')->name('tickets');
+        Route::get('/tickets', 'all')->name('tickets');
         Route::get('/ticket/{id}', 'view')->name('ticket.view');
-        Route::get('/learn-content/edit/{id}', 'edit')->name('learn-content.edit');
-        Route::post('/learn-content/update', 'update')->name('learn-content.update');
-        Route::get('/learn-content/delete/{id}', 'delete')->name('learn-content.delete');
+        Route::post('/ticket/update', 'update')->name('ticket.update');
     });
 });
 Auth::routes();

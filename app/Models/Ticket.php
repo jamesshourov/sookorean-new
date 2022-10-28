@@ -15,6 +15,7 @@ class Ticket extends Model
         'title',
         'description',
         'type',
+        'status',
         'ticket_number'
     ];
 }

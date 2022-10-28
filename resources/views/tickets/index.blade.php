@@ -109,4 +109,15 @@
 
     </div>
     <!-- end main content-->
+    <style>
+        .badge-danger{
+            background: red;
+        }
+        .badge-warning{
+            background: yellow;
+        }
+        .badge-success{
+            background: green;
+        }
+    </style>
 @endsection
