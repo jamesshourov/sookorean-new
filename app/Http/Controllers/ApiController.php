@@ -642,6 +642,7 @@ class ApiController extends Controller
         $status = DB::table('tickets')
             ->insert([
                 'sender_email' => $request->sender_email,
+                'sender_name' => $request->sender_name,
                 'receiver_email' => $request->receiver_email,
                 'title' => $request->title,
                 'description' => $request->description,
@@ -666,6 +667,20 @@ class ApiController extends Controller
         }else{
             $status = false;
             $message = 'Something went wrong';
+            return response()->json(compact('status', 'message'));
+        }
+    }
+
+    public function updateLanguage(Request $request)
+    {
+        $saved = DB::table('users')->where('id', $this->guard()->user()->id)->update(['language' => $request->language]);
+        if ($saved) {
+            $status = true;
+            $message = 'Updated successfully.';
+            return response()->json(compact('status', 'message'));
+        } else {
+            $status = false;
+            $message = 'Something went wrong!';
             return response()->json(compact('status', 'message'));
         }
     }

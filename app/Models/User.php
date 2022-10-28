@@ -33,6 +33,7 @@ class User extends Authenticatable implements JWTSubject
         'premium',
         'expiry_date',
         'role',
+        'language',
         'status'
     ];
 

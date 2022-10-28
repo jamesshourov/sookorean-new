@@ -151,6 +151,11 @@ Route::group(['middleware' => ['admin']], function () {
         Route::get('/ticket/{id}', 'view')->name('ticket.view');
         Route::post('/ticket/update', 'update')->name('ticket.update');
     });
+
+    Route::controller(\App\Http\Controllers\EmailController::class)->group(function () {
+        Route::get('/email', 'index')->name('email');
+        Route::post('/email/send', 'send')->name('email.send');
+    });
 });
 Auth::routes();
 

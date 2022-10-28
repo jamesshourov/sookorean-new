@@ -226,6 +226,13 @@
                 </li>
 
                 <li class="nav-item">
+                    <a class="nav-link menu-link {{ request()->routeIs('email') || request()->routeIs('email') ? 'active' : '' }}"
+                       href="{{ route('email') }}">
+                        <i class="ri-mail-send-line"></i> <span data-key="t-dashboards">Email</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
                     <a class="nav-link menu-link {{ request()->routeIs('privacy.edit') ? 'active' : '' }}"
                        href="{{ route('privacy.edit') }}">
                         <i class="ri-book-open-line"></i> <span data-key="t-dashboards">Privacy Policy</span>

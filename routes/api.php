@@ -42,5 +42,6 @@ Route::group(['middleware' => 'api'], function ($router) {
         Route::post('/get-lifejobs', 'getLifeJobs');
         Route::post('/mark-level-completed', 'markLevelCompleted');
         Route::post('/create-ticket', 'createTicket');
+        Route::post('/change-language', 'changeLanguage');
     });
 });
